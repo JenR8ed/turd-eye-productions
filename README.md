@@ -1,75 +1,64 @@
 # Turd Eye Productions
 
-**AI Music Monetization Guides, Workflows, Decision Matrices & Profit Pipelines**
+**Agentic-agnostic AI Music Monetization System**
 
-Practical playbooks for turning AI-generated music into real income in 2026.
-
----
-
-## Recommended Starter Pipeline (for Actual Profit)
-
-### Simple 4-Step Workflow
-
-1. Generate tracks on a paid plan that grants commercial rights  
-2. Do light editing (cut, arrange, clean up)  
-3. Release to streaming + offer custom tracks for money  
-4. Repeat and promote
-
-### Core Table
-
-| Stage              | What You Do                              | Tools / Platforms                  | Cost (USD)                  |
-|--------------------|------------------------------------------|------------------------------------|-----------------------------|
-| Generate           | Create full songs with commercial rights | Suno Pro                           | $10 per month              |
-| Edit / Improve     | Cut bad parts, arrange, light mix        | Audacity (free) or Reaper ($60 one-time) | $0 – $60 one-time         |
-| Distribute         | Upload to Spotify, Apple, etc.           | DistroKid                          | $25 per year               |
-| Sell for Profit    | Offer custom tracks to clients           | Fiverr, Upwork, or your own site   | $0 (just time)             |
-
-**Total starting cost**: About **$35** the first month, then **~$12–15/month** ongoing.
+Practical, modular playbooks for turning AI-generated music into real income. Designed so any human or AI agent (Grok, Claude, Perplexity, Cursor, etc.) can operate it cleanly.
 
 ---
 
-## Realistic Money Numbers (USD)
+## Quick Links
 
-| Path                        | How Many Songs Needed          | Realistic Monthly Income (after 2–4 months of consistent work) | Notes |
-|-----------------------------|-------------------------------|---------------------------------------------------------------|-------|
-| Streaming only              | 80–150+ songs                 | $20 – $150                                                    | Very slow. Needs playlists + volume |
-| YouTube music channel       | 30–60 solid videos            | $50 – $400                                                    | Better than pure streaming if you add visuals |
-| Custom commissions (main profit) | 5–10 sample tracks as portfolio | $300 – $1,500+                                                | Fastest way to real profit. Charge $75–250 per custom track |
-| Hybrid (recommended)        | 40–60 released + samples      | $400 – $2,000                                                 | Streaming + YouTube + 4–8 custom jobs per month |
-
-**Bottom line for profit**:  
-Focus hard on selling custom tracks (podcast intros, YouTube backgrounds, game music, personal songs). Streaming and YouTube are slower side income. With 5–8 custom jobs a month at $100–150 each you can clear real profit while the catalog grows in the background.
+| File | Purpose |
+|------|--------|
+| [AGENTS.md](AGENTS.md) | **Start here if you are an AI agent** |
+| [STRUCTURE.md](STRUCTURE.md) | Full project map |
+| [docs/01-quickstart.md](docs/01-quickstart.md) | Get to first dollar fast |
+| [docs/06-custom-commissions.md](docs/06-custom-commissions.md) | Main profit engine |
+| [configs/tools.json](configs/tools.json) | Current tools & costs |
 
 ---
 
-## Decision Matrix Snapshot (Key Generators)
+## Core Pipeline (Human Summary)
 
-| Platform              | Entry Commercial Cost | Commercial Rights | Output Type          | Legal Risk | Best For |
-|-----------------------|-----------------------|-------------------|----------------------|------------|----------|
-| **Suno Pro**         | $8–10/mo             | Strong            | Full songs + vocals | Medium    | Streaming releases |
-| **Soundraw**         | ~$11–20/mo           | Excellent (in-house) | Instrumentals / BGM | Low       | YouTube & video content |
-| **ElevenLabs Music** | ~$5–22/mo            | Strong            | Songs + instrumentals | Low–Medium | Client work |
-| **Stable Audio**     | ~$12/mo              | Good              | Instrumentals       | Low       | Sound design |
-| **Udio**             | ~$10–30/mo           | Restricted        | High-fidelity songs | High      | Avoid for external sales (walled garden) |
+| Stage | What You Do | Tools | Cost (USD) |
+|-------|-------------|-------|------------|
+| Generate | Create tracks with commercial rights | Suno Pro (primary) | $10/mo |
+| Edit | Light arrangement & cleanup | Audacity (free) | $0 |
+| Distribute | Upload to DSPs | DistroKid | $25/year |
+| Sell | Custom commissions | Fiverr / direct | Time only |
 
----
-
-## Key Rules for Staying Safe & Making Money
-
-- Only generate commercial tracks while on a paid plan.  
-- Always disclose AI use on DistroKid and platforms.  
-- Add some human editing — pure AI output has weak copyright protection.  
-- Never clone real artists’ voices.  
-- Custom commissions are the fastest path to profit. Streaming is slow volume play.
+**Starter cost**: ~$35 first month → ~$12–15/month ongoing.
 
 ---
 
-## Repo Structure
+## Realistic Profit Paths (USD)
 
-- `README.md` — This overview + core pipeline & numbers  
-- More detailed guides will be added as files in `/docs` as needed.
+| Path | Content Needed | Realistic Monthly (after 2–4 mo) |
+|------|----------------|----------------------------------|
+| Streaming only | 80–150+ songs | $20 – $150 |
+| YouTube channel | 30–60 videos | $50 – $400 |
+| **Custom commissions** | 5–10 samples | **$300 – $1,500+** |
+| Hybrid (recommended) | 40–60 + samples | $400 – $2,000 |
+
+**Primary recommendation**: Focus on custom commissions first. Catalog and streaming are secondary.
+
+---
+
+## Key Rules
+
+- Generate only on paid commercial-rights plans.
+- Always disclose AI use.
+- Add human editing.
+- Never clone real artists’ voices.
+- Log every track (see `templates/rights-log.md`).
+
+---
+
+## For AI Agents
+
+Read **AGENTS.md** first. It contains the operating principles, decision flow, and safety rules that make this repo agent-agnostic.
 
 ---
 
 **Turd Eye Productions**  
-Built for turning AI files into actual cash.
+Built to turn AI files into actual cash — cleanly and repeatably.
