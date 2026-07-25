@@ -2,26 +2,76 @@
   "name": "Turd Eye Productions",
   "slug": "turd-eye-productions",
   "type": "knowledge-tooling",
-  "description": "Agentic-agnostic AI music monetization system with rights logging, cost tracking, and multi-agent role design.",
+  "description": "Agentic-agnostic AI music monetization system with headless rights logging, cost tracking, and multi-agent role design.",
   "repo": "https://github.com/JenR8ed/turd-eye-productions",
-  "status": "scaffold-complete",
+  "status": "operational",
   "platform": "GitHub",
   "primary_language": "Markdown + Python",
+  "python_requires": ">=3.9",
+  "dependencies": "none (Python standard library only)",
   "jaios_module": true,
   "deploy_kit_compliant": true,
   "notion_command_center": {
     "register": true,
+    "registered": false,
     "category": "Monetization / Creative Tools",
-    "notes": "Knowledge + CLI tooling. Not a Vercel app."
+    "notes": "Knowledge + CLI tooling. Not a Vercel app. Registration is still a manual step: no NOTION_API_KEY is provisioned, so the deploy workflow cannot sync status automatically."
+  },
+  "components": {
+    "knowledge_layer": {
+      "status": "complete",
+      "notes": "docs/, templates/, playbooks/, configs/tools.json"
+    },
+    "rights_logger": {
+      "status": "implemented",
+      "headless": true,
+      "tested": true,
+      "commands": ["add", "list", "verify", "export"]
+    },
+    "cost_tracker": {
+      "status": "implemented",
+      "headless": true,
+      "tested": true,
+      "commands": ["add-expense", "add-income", "summary", "list"]
+    },
+    "ci_pipeline": {
+      "status": "implemented",
+      "notes": "deploy.yml: compile, unit tests, headless smoke test, stdlib-only assertion, JSON validation, required-file check"
+    },
+    "notion_sync": {
+      "status": "not-implemented",
+      "blocked_on": "NOTION_API_KEY secret"
+    },
+    "github_pages": {
+      "status": "not-implemented",
+      "blocked_on": "repository settings access"
+    },
+    "agent_runtime": {
+      "status": "not-implemented",
+      "notes": "Phase 3. Would introduce third-party dependencies, conflicting with the stdlib-only constraint (NFR-01) — a deliberate trade-off decision, not just an implementation task."
+    },
+    "commission_pipeline": {
+      "status": "documented-only",
+      "notes": "templates/ and docs/06 describe the process; no automation. Requires payment/delivery decisions from the operator."
+    }
   },
   "entrypoints": {
     "agents": "AGENTS.md",
     "architecture": "ARCHITECTURE.md",
+    "design_doc": "docs/09-software-architecture-design.md",
     "quickstart": "docs/01-quickstart.md",
     "scripts": [
       "scripts/rights_logger.py",
       "scripts/cost_tracker.py"
-    ]
+    ],
+    "tests": "python -m unittest discover -s tests"
   },
-  "last_updated": "2026-07-24"
+  "data": {
+    "principle": "FSAD",
+    "location": "data/",
+    "location_override_env": "TEP_DATA_DIR",
+    "files": ["rights_log.csv", "costs.csv"],
+    "derived": ["rights_log.md", "cost_summary.md"]
+  },
+  "last_updated": "2026-07-25"
 }

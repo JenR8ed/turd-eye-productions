@@ -89,12 +89,16 @@ python -m unittest discover -s tests
 
 This repository follows the **Universal JAIOS Update & Sync Protocol** from [`jenr8ed-deploy-kit`](https://github.com/JenR8ed/jenr8ed-deploy-kit).
 
-- Quality gates run on every push/PR (Python syntax + JSON validation + required files)
+- Quality gates run on every PR: byte-compile, unit tests, headless CLI smoke test,
+  stdlib-only assertion, JSON validation, and required-file checks
 - Status job on `main` for visibility
-- Designed for registration in the Notion JAIOS Command Center
+- All changes go through a pull request — no direct pushes to `main`
+- Notion JAIOS Command Center registration is still a manual step (no API credential wired up)
 - Zero-bloat, File-System-as-Database (FSAD) principles
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) and the formal [SADD](docs/09-software-architecture-design.md) for full design.
+See [ARCHITECTURE.md](ARCHITECTURE.md) and the formal [SADD](docs/09-software-architecture-design.md) for full design,
+and [`jaios.manifest.json`](jaios.manifest.json) for a per-component breakdown of what is
+implemented versus documented-only.
 
 ---
 

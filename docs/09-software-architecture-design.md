@@ -2,9 +2,9 @@
 
 **Project:** Turd Eye Productions  
 **Type:** Knowledge + Tooling System (JAIOS Module)  
-**Version:** 1.0  
-**Date:** 2026-07-24  
-**Status:** Scaffold Complete / Implementation Ready  
+**Version:** 1.1  
+**Date:** 2026-07-25  
+**Status:** Knowledge layer complete · Tooling layer implemented, tested, and CI-gated · Notion sync outstanding  
 **Owner:** JenR8ed (Jennifer McKinley)  
 **Related:** [ARCHITECTURE.md](../ARCHITECTURE.md) · [AGENTS.md](../AGENTS.md) · [jaios.manifest.json](../jaios.manifest.json)
 
@@ -70,6 +70,8 @@ It serves as the authoritative design reference for implementation, maintenance,
 | FR-08 | System shall integrate with JAIOS publishing pipeline (quality gates + status) | Must |
 | FR-09 | System shall support multi-agent role mapping (Generator, Rights, Editor, Sales, Catalog) | Should |
 | FR-10 | System shall allow export of rights log to Markdown | Should |
+| FR-11 | System shall machine-verify rights entries against the release rules (commercial rights + human edits recorded) | Should |
+| FR-12 | System shall emit machine-readable (JSON) and report (Markdown) financial summaries | Should |
 
 ### 3.2 Non-Functional Requirements
 
@@ -81,6 +83,9 @@ It serves as the authoritative design reference for implementation, maintenance,
 | NFR-04 | System shall remain agent-agnostic (no lock-in to a single LLM or framework) | Must |
 | NFR-05 | Quality pipeline shall fail on missing core files or invalid configs | Must |
 | NFR-06 | Documentation shall be sufficient for a new agent to operate without prior context | Should |
+| NFR-07 | All CLIs shall be operable headlessly — every input settable by flag, no step requiring a TTY or UI. Missing required input in non-interactive mode shall exit non-zero rather than block on a prompt | Must |
+| NFR-08 | CLIs shall validate input and reject malformed entries before writing to the data layer | Must |
+| NFR-09 | Tooling shall be covered by automated tests executed in CI, isolated from real operational data | Must |
 
 ---
 
@@ -114,11 +119,15 @@ It serves as the authoritative design reference for implementation, maintenance,
 | AGENTS.md | Spec | Operating rules & decision flow for agents | Read by any agent |
 | docs/* | Knowledge | Workflows, matrices, risk, commissions | Human + agent |
 | templates/* | Assets | Copy-paste ready client & release materials | Human + agent |
-| rights_logger.py | CLI Tool | Append/list/export generation rights | CLI / shell |
-| cost_tracker.py | CLI Tool | Log expenses/income + summary | CLI / shell |
+| rights_logger.py | CLI Tool | Append/list/verify/export generation rights | CLI flags or prompts |
+| cost_tracker.py | CLI Tool | Log expenses/income + summary (text/JSON/Markdown) | CLI flags or prompts |
+| tests/ | Tests | Verify CLI behaviour, validation, and exit codes | `unittest discover` |
 | tools.json | Config | Current recommended tools & costs | JSON |
 | deploy.yml | CI | Quality gates + status | GitHub Actions |
 | jaios.manifest.json | Manifest | Registration metadata for Command Center | JSON |
+
+Both CLIs are flag-driven so that agents and CI can invoke them without a terminal;
+interactive prompting is a fallback used only when `stdin` is a TTY (NFR-07).
 
 ### 4.3 Data Design
 
@@ -174,13 +183,17 @@ Roles may be implemented by separate agents, separate sessions, or a single agen
 
 ### 6.1 Pipeline
 
-1. Push to `main`
-2. GitHub Actions (`deploy.yml`):
-   - Compile-check Python scripts
-   - Validate `configs/tools.json`
+1. Open a pull request against `main` (direct pushes to `main` are not permitted)
+2. GitHub Actions (`deploy.yml`) `quality` job:
+   - Byte-compile `scripts/` and `tests/`
+   - Run the `unittest` suite
+   - Run a headless CLI smoke test (no TTY, mirroring agent/CI invocation)
+   - Assert stdlib-only (fails if a dependency manifest appears)
+   - Validate `configs/tools.json` and `jaios.manifest.json`
    - Assert required architecture files exist
-3. Status job reports success
-4. Manual or future automated update to Notion JAIOS Command Center
+3. Merge when green; `status` job then reports on `main`
+4. Manual update to the Notion JAIOS Command Center — no API credential is
+   provisioned, so this step is not automated
 
 ### 6.2 Constraints
 - Primary platform is GitHub (knowledge + scripts), not Vercel
@@ -225,6 +238,12 @@ Roles may be implemented by separate agents, separate sessions, or a single agen
 | FR-08 JAIOS pipeline | .github/workflows/deploy.yml + jaios.manifest.json |
 | FR-09 Multi-agent roles | docs/08-multi-agent-frameworks.md |
 | FR-10 Export | rights_logger.py export command |
+| FR-11 Rights verification | rights_logger.py verify [--strict] |
+| FR-12 Machine-readable summaries | cost_tracker.py summary --json / --markdown |
+| NFR-01 stdlib-only | Enforced by the "Confirm stdlib-only" CI step |
+| NFR-07 Headless operation | argparse flags on both CLIs + CI headless smoke test |
+| NFR-08 Input validation | valid_date / money / normalize_yes_no / valid_generation_datetime |
+| NFR-09 Automated tests | tests/test_cost_tracker.py, tests/test_rights_logger.py (CI) |
 
 ---
 
@@ -247,4 +266,8 @@ Roles may be implemented by separate agents, separate sessions, or a single agen
 ---
 
 **Document Control**  
-Version 1.0 — 2026-07-24 — Initial formal SADD for Turd Eye Productions (JAIOS module).
+Version 1.0 — 2026-07-24 — Initial formal SADD for Turd Eye Productions (JAIOS module).  
+Version 1.1 — 2026-07-25 — Added FR-11/FR-12 (rights verification, machine-readable
+summaries) and NFR-07/08/09 (headless operation, input validation, automated tests) to
+match the implemented tooling. Updated §4.2, §6.1, and §8 traceability. No change to the
+data contracts in §4.3.
