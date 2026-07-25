@@ -132,8 +132,9 @@ def compute_summary() -> dict:
     income = Decimal("0")
     expenses = Decimal("0")
     by_category: dict[str, Decimal] = {}
+    rows = read_rows()
 
-    for row in read_rows():
+    for row in rows:
         try:
             amount = Decimal(row["amount_usd"])
         except InvalidOperation:
@@ -155,7 +156,7 @@ def compute_summary() -> dict:
             cat: f"{val:.2f}"
             for cat, val in sorted(by_category.items(), key=lambda kv: abs(kv[1]), reverse=True)
         },
-        "entry_count": len(read_rows()),
+        "entry_count": len(rows),
         "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
     }
 
