@@ -1,0 +1,27 @@
+{
+  "name": "Turd Eye Productions",
+  "slug": "turd-eye-productions",
+  "type": "knowledge-tooling",
+  "description": "Agentic-agnostic AI music monetization system with rights logging, cost tracking, and multi-agent role design.",
+  "repo": "https://github.com/JenR8ed/turd-eye-productions",
+  "status": "scaffold-complete",
+  "platform": "GitHub",
+  "primary_language": "Markdown + Python",
+  "jaios_module": true,
+  "deploy_kit_compliant": true,
+  "notion_command_center": {
+    "register": true,
+    "category": "Monetization / Creative Tools",
+    "notes": "Knowledge + CLI tooling. Not a Vercel app."
+  },
+  "entrypoints": {
+    "agents": "AGENTS.md",
+    "architecture": "ARCHITECTURE.md",
+    "quickstart": "docs/01-quickstart.md",
+    "scripts": [
+      "scripts/rights_logger.py",
+      "scripts/cost_tracker.py"
+    ]
+  },
+  "last_updated": "2026-07-24"
+}
