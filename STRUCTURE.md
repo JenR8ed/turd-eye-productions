@@ -7,17 +7,23 @@ turd-eye-productions/
 ├── README.md                     # Overview + JAIOS context
 ├── STRUCTURE.md                  # This file
 ├── LICENSE                       # MIT
+├── FSAD_EXCEPTION.md             # Logged policy exceptions (e.g. unsigned commits)
+├── .gitignore                    # Python bytecode
 ├── jaios.manifest.json           # Manifest for Notion / JAIOS Command Center
 │
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml            # JAIOS-compliant quality + status pipeline
 │
-├── scripts/                      # Executable helpers (stdlib Python)
-│   ├── rights_logger.py
-│   └── cost_tracker.py
+├── scripts/                      # Executable helpers (stdlib Python, headless)
+│   ├── rights_logger.py          # add | list | verify | export
+│   └── cost_tracker.py           # add-expense | add-income | summary | list
 │
-├── data/                         # Runtime data (FSAD)
+├── tests/                        # stdlib unittest suite (no third-party deps)
+│   ├── test_rights_logger.py
+│   └── test_cost_tracker.py
+│
+├── data/                         # Runtime data (FSAD), created on first use
 │   └── README.md
 │
 ├── docs/
@@ -46,6 +52,7 @@ turd-eye-productions/
 ## Design Goals
 - **Agentic-agnostic**: Any LLM or agent can read and act on these files.
 - **JAIOS-compliant**: Follows the Universal Update Protocol from `jenr8ed-deploy-kit`.
-- **Zero-bloat**: stdlib Python only.
-- **File-System-as-Database**: Operational data lives in `data/`.
+- **Zero-bloat**: stdlib Python only (enforced in CI).
+- **Headless-first**: Every CLI is fully flag-driven; no step requires a TTY or UI.
+- **File-System-as-Database**: Operational data lives in `data/` (override with `TEP_DATA_DIR`).
 - **Living documentation**: Update `configs/tools.json` and docs when reality changes.
