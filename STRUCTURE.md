@@ -3,18 +3,24 @@
 ```
 turd-eye-productions/
 ├── AGENTS.md                     # How any AI agent should operate this repo
-├── README.md                     # Overview + core numbers
+├── ARCHITECTURE.md               # End-to-end architecture & implementation roadmap
+├── README.md                     # Overview + JAIOS context
 ├── STRUCTURE.md                  # This file
 ├── LICENSE                       # MIT
+├── jaios.manifest.json           # Manifest for Notion / JAIOS Command Center
+│
+├── .github/
+│   └── workflows/
+│       └── deploy.yml            # JAIOS-compliant quality + status pipeline
 │
 ├── scripts/                      # Executable helpers (stdlib Python)
-│   ├── rights_logger.py          # Log generation rights
-│   └── cost_tracker.py           # Track expenses & income
+│   ├── rights_logger.py
+│   └── cost_tracker.py
 │
-├── data/                         # Runtime data (created by scripts)
+├── data/                         # Runtime data (FSAD)
 │   └── README.md
 │
-├── docs/                         # Operational guides
+├── docs/
 │   ├── 01-quickstart.md
 │   ├── 02-workflow.md
 │   ├── 03-decision-matrix.md
@@ -23,7 +29,7 @@ turd-eye-productions/
 │   ├── 06-custom-commissions.md
 │   └── 08-multi-agent-frameworks.md
 │
-├── templates/                    # Copy-paste assets
+├── templates/
 │   ├── fiverr-gig.md
 │   ├── client-brief.md
 │   ├── release-checklist.md
@@ -33,12 +39,12 @@ turd-eye-productions/
 │   └── daily-ops.md
 │
 └── configs/
-    └── tools.json                # Current recommended tools & costs
+    └── tools.json
 ```
 
 ## Design Goals
 - **Agentic-agnostic**: Any LLM or agent can read and act on these files.
-- **Human-readable**: Clear, imperative language.
-- **Modular**: Agents and humans can load only what they need.
-- **Living documentation**: Update `configs/tools.json` when prices or policies change.
-- **Lightweight automation**: Scripts use only the Python standard library.
+- **JAIOS-compliant**: Follows the Universal Update Protocol from `jenr8ed-deploy-kit`.
+- **Zero-bloat**: stdlib Python only.
+- **File-System-as-Database**: Operational data lives in `data/`.
+- **Living documentation**: Update `configs/tools.json` and docs when reality changes.
