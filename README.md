@@ -15,7 +15,8 @@ Designed so any human or AI agent (Grok, Claude, Perplexity, Cursor, OpenHands, 
 
 | File | Purpose |
 |------|--------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | **End-to-end architecture & implementation roadmap** |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | End-to-end architecture & implementation roadmap |
+| [docs/09-software-architecture-design.md](docs/09-software-architecture-design.md) | **Formal Software Architecture & Design / Requirements (SADD)** |
 | [AGENTS.md](AGENTS.md) | Start here if you are an AI agent |
 | [STRUCTURE.md](STRUCTURE.md) | Full project map |
 | [docs/01-quickstart.md](docs/01-quickstart.md) | Get to first dollar fast |
@@ -76,7 +77,7 @@ This repository follows the **Universal JAIOS Update & Sync Protocol** from [`je
 - Designed for registration in the Notion JAIOS Command Center
 - Zero-bloat, File-System-as-Database (FSAD) principles
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the full layered design and implementation phases.
+See [ARCHITECTURE.md](ARCHITECTURE.md) and the formal [SADD](docs/09-software-architecture-design.md) for full design.
 
 ---
 
