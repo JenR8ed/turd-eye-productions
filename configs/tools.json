@@ -1,0 +1,85 @@
+{
+  "last_updated": "2026-07-24",
+  "currency": "USD",
+  "generators": [
+    {
+      "name": "Suno",
+      "recommended_plan": "Pro",
+      "monthly_cost": 10,
+      "annual_effective": 8,
+      "commercial_rights": true,
+      "output_type": "full_songs_with_vocals",
+      "download": true,
+      "legal_risk": "medium",
+      "status": "recommended",
+      "notes": "Best for vocal tracks and streaming releases. Rights apply to tracks made while subscribed."
+    },
+    {
+      "name": "Soundraw",
+      "recommended_plan": "Creator",
+      "monthly_cost": 15,
+      "commercial_rights": true,
+      "output_type": "instrumentals_bgm",
+      "download": true,
+      "legal_risk": "low",
+      "status": "recommended",
+      "notes": "In-house training data. Lowest legal risk. Excellent for YouTube and client BGM."
+    },
+    {
+      "name": "ElevenLabs Music",
+      "recommended_plan": "Creator or higher",
+      "monthly_cost": 22,
+      "commercial_rights": true,
+      "output_type": "songs_and_instrumentals",
+      "download": true,
+      "legal_risk": "low-medium",
+      "status": "recommended",
+      "notes": "Licensed data emphasis. Good for client work."
+    },
+    {
+      "name": "Stable Audio",
+      "recommended_plan": "Creator",
+      "monthly_cost": 12,
+      "commercial_rights": true,
+      "output_type": "instrumentals",
+      "download": true,
+      "legal_risk": "low",
+      "status": "recommended",
+      "notes": "Strong for sound design and ambient."
+    },
+    {
+      "name": "Udio",
+      "status": "not_recommended_for_external",
+      "notes": "Walled garden. Downloads largely disabled. Avoid for Spotify/Apple distribution."
+    }
+  ],
+  "distributors": [
+    {
+      "name": "DistroKid",
+      "plan": "Musician",
+      "yearly_cost": 25,
+      "ai_policy": "Allowed with disclosure",
+      "royalty_split": "100% while subscribed",
+      "status": "recommended"
+    }
+  ],
+  "editors": [
+    {
+      "name": "Audacity",
+      "cost": 0,
+      "notes": "Free. Sufficient for light editing."
+    },
+    {
+      "name": "Reaper",
+      "cost": 60,
+      "notes": "One-time. Powerful and cheap."
+    }
+  ],
+  "recommended_starter_stack": {
+    "generator": "Suno Pro",
+    "editor": "Audacity",
+    "distributor": "DistroKid",
+    "monthly_burn": "12-15",
+    "first_month": "~35"
+  }
+}
