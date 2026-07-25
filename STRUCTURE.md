@@ -27,7 +27,8 @@ turd-eye-productions/
 │   ├── 04-cost-profit.md
 │   ├── 05-risk-mitigation.md
 │   ├── 06-custom-commissions.md
-│   └── 08-multi-agent-frameworks.md
+│   ├── 08-multi-agent-frameworks.md
+│   └── 09-software-architecture-design.md   # Formal SADD / requirements
 │
 ├── templates/
 │   ├── fiverr-gig.md
