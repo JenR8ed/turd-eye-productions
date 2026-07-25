@@ -50,9 +50,31 @@ When performing work, agents should produce:
 - Always recommend disclosure on DistroKid / DSPs.
 - Flag high-risk platforms (current: Udio for external distribution).
 
-## Available Scripts (stdlib Python)
-- `python scripts/rights_logger.py add|list|export`
-- `python scripts/cost_tracker.py add-expense|add-income|summary|list`
+## Available Scripts (stdlib Python, headless-safe)
+
+Both CLIs accept every field as a flag, so you can run them without a TTY. If a
+required field is missing and there is no interactive terminal, the command exits
+non-zero with a clear message instead of hanging on a prompt. Add `--help` for full usage.
+
+```bash
+python scripts/rights_logger.py add --title "..." --tool Suno --plan Pro \
+    --commercial yes --human-edits "..." --distributor DistroKid --notes "..."
+python scripts/rights_logger.py list --limit 5
+python scripts/rights_logger.py verify --strict    # non-zero if any entry breaks the rules below
+python scripts/rights_logger.py export             # -> data/rights_log.md
+
+python scripts/cost_tracker.py add-expense --category Suno --amount 10 --description "..."
+python scripts/cost_tracker.py add-income --category Commission --amount 300 --description "..."
+python scripts/cost_tracker.py summary --json      # machine-readable totals
+python scripts/cost_tracker.py summary --markdown  # -> data/cost_summary.md
+python scripts/cost_tracker.py list --limit 10
+```
+
+`rights_logger verify` machine-checks two of the operating principles above: every
+entry must have commercial rights recorded (principle 1) and human edits recorded
+(principle 3). Run it before advising a release.
+
+Set `TEP_DATA_DIR` to override where `data/` lives.
 
 ## Multi-Agent Collaboration
 See `docs/08-multi-agent-frameworks.md` for the 2026 landscape and the recommended role design (Generator, Rights, Editor, Sales, Catalog, Supervisor).

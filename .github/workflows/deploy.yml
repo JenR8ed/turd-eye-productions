@@ -25,13 +25,36 @@ jobs:
 
       - name: Syntax check scripts
         run: |
-          python -m py_compile scripts/rights_logger.py
-          python -m py_compile scripts/cost_tracker.py
+          python -m compileall -q scripts tests
           echo "✓ Python scripts compile cleanly"
 
-      - name: Validate tools.json
+      - name: Run unit tests
+        run: |
+          python -m unittest discover -s tests -v
+
+      - name: Confirm stdlib-only (NFR-01)
+        run: |
+          if [ -f requirements.txt ] || [ -f pyproject.toml ] || [ -f setup.py ]; then
+            echo "Dependency manifest found; NFR-01 requires stdlib-only scripts."
+            exit 1
+          fi
+          echo "✓ No third-party dependency manifests — stdlib-only maintained"
+
+      - name: Validate JSON configs and manifest
         run: |
           python -c "import json; json.load(open('configs/tools.json')); print('✓ tools.json is valid JSON')"
+          python -c "import json; json.load(open('jaios.manifest.json')); print('✓ jaios.manifest.json is valid JSON')"
+
+      - name: Headless CLI smoke test
+        run: |
+          export TEP_DATA_DIR="$(mktemp -d)"
+          python scripts/cost_tracker.py add-expense --category Suno --amount 10 --description "CI smoke"
+          python scripts/cost_tracker.py add-income --category Commission --amount 300 --description "CI smoke"
+          python scripts/cost_tracker.py summary --json
+          python scripts/rights_logger.py add --title "CI Smoke" --tool Suno --plan Pro --human-edits "ci"
+          python scripts/rights_logger.py verify --strict
+          python scripts/rights_logger.py export
+          echo "✓ CLIs are operable headlessly (no TTY required)"
 
       - name: Check required architecture files
         run: |

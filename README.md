@@ -54,16 +54,33 @@ Designed so any human or AI agent (Grok, Claude, Perplexity, Cursor, OpenHands, 
 
 ## Tooling
 
+Both CLIs are stdlib-only and fully **headless** — every field can be passed as a flag,
+so agents and CI can drive them without a terminal. Omit a flag while at an interactive
+terminal and you'll be prompted for it instead.
+
 ```bash
 # Rights logging
-python scripts/rights_logger.py add
-python scripts/rights_logger.py list
-python scripts/rights_logger.py export
+python scripts/rights_logger.py add --title "Neon Drift" --tool Suno --plan Pro \
+    --commercial yes --human-edits "trimmed intro" --distributor DistroKid
+python scripts/rights_logger.py list --limit 5
+python scripts/rights_logger.py verify --strict   # enforce AGENTS.md release rules
+python scripts/rights_logger.py export            # -> data/rights_log.md
 
 # Cost & income tracking
-python scripts/cost_tracker.py add-expense
-python scripts/cost_tracker.py add-income
+python scripts/cost_tracker.py add-expense --category Suno --amount 10 --description "Pro plan"
+python scripts/cost_tracker.py add-income --category Commission --amount 300 --description "Client track"
 python scripts/cost_tracker.py summary
+python scripts/cost_tracker.py summary --json      # machine-readable
+python scripts/cost_tracker.py summary --markdown  # -> data/cost_summary.md
+python scripts/cost_tracker.py list --limit 10
+```
+
+Add `--help` to any command for the full flag list. Data is written to `data/` by
+default; set `TEP_DATA_DIR` to redirect it (used by the tests and CI).
+
+```bash
+# Tests (stdlib unittest, no dependencies)
+python -m unittest discover -s tests
 ```
 
 ---
