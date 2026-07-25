@@ -1,8 +1,13 @@
 # Turd Eye Productions
 
-**Agentic-agnostic AI Music Monetization System**
+**JAIOS Module — Agentic-agnostic AI Music Monetization System**
 
-Practical, modular playbooks for turning AI-generated music into real income. Designed so any human or AI agent (Grok, Claude, Perplexity, Cursor, etc.) can operate it cleanly.
+Part of the [JenR8ed / JAIOS](https://github.com/JenR8ed) ecosystem.  
+Practical playbooks + lightweight tooling for turning AI-generated music into real income.
+
+Designed so any human or AI agent (Grok, Claude, Perplexity, Cursor, OpenHands, etc.) can operate it cleanly.
+
+[![JAIOS Pipeline](https://github.com/JenR8ed/turd-eye-productions/actions/workflows/deploy.yml/badge.svg)](https://github.com/JenR8ed/turd-eye-productions/actions/workflows/deploy.yml)
 
 ---
 
@@ -10,15 +15,17 @@ Practical, modular playbooks for turning AI-generated music into real income. De
 
 | File | Purpose |
 |------|--------|
-| [AGENTS.md](AGENTS.md) | **Start here if you are an AI agent** |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | **End-to-end architecture & implementation roadmap** |
+| [AGENTS.md](AGENTS.md) | Start here if you are an AI agent |
 | [STRUCTURE.md](STRUCTURE.md) | Full project map |
 | [docs/01-quickstart.md](docs/01-quickstart.md) | Get to first dollar fast |
 | [docs/06-custom-commissions.md](docs/06-custom-commissions.md) | Main profit engine |
+| [docs/08-multi-agent-frameworks.md](docs/08-multi-agent-frameworks.md) | Multi-agent roles & frameworks |
 | [configs/tools.json](configs/tools.json) | Current tools & costs |
 
 ---
 
-## Core Pipeline (Human Summary)
+## Core Pipeline
 
 | Stage | What You Do | Tools | Cost (USD) |
 |-------|-------------|-------|------------|
@@ -40,7 +47,36 @@ Practical, modular playbooks for turning AI-generated music into real income. De
 | **Custom commissions** | 5–10 samples | **$300 – $1,500+** |
 | Hybrid (recommended) | 40–60 + samples | $400 – $2,000 |
 
-**Primary recommendation**: Focus on custom commissions first. Catalog and streaming are secondary.
+**Primary recommendation**: Focus on custom commissions first.
+
+---
+
+## Tooling
+
+```bash
+# Rights logging
+python scripts/rights_logger.py add
+python scripts/rights_logger.py list
+python scripts/rights_logger.py export
+
+# Cost & income tracking
+python scripts/cost_tracker.py add-expense
+python scripts/cost_tracker.py add-income
+python scripts/cost_tracker.py summary
+```
+
+---
+
+## JAIOS Publishing Pipeline
+
+This repository follows the **Universal JAIOS Update & Sync Protocol** from [`jenr8ed-deploy-kit`](https://github.com/JenR8ed/jenr8ed-deploy-kit).
+
+- Quality gates run on every push/PR (Python syntax + JSON validation + required files)
+- Status job on `main` for visibility
+- Designed for registration in the Notion JAIOS Command Center
+- Zero-bloat, File-System-as-Database (FSAD) principles
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full layered design and implementation phases.
 
 ---
 
@@ -50,15 +86,9 @@ Practical, modular playbooks for turning AI-generated music into real income. De
 - Always disclose AI use.
 - Add human editing.
 - Never clone real artists’ voices.
-- Log every track (see `templates/rights-log.md`).
+- Log every track.
 
 ---
 
-## For AI Agents
-
-Read **AGENTS.md** first. It contains the operating principles, decision flow, and safety rules that make this repo agent-agnostic.
-
----
-
-**Turd Eye Productions**  
+**Turd Eye Productions** · JAIOS Module  
 Built to turn AI files into actual cash — cleanly and repeatably.
