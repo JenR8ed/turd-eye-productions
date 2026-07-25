@@ -3,8 +3,9 @@ name: JAIOS Turd Eye Pipeline
 on:
   push:
     branches: [ main ]
+  # No base-branch filter: quality gates must run on every PR, including stacked
+  # PRs whose base is another feature branch.
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 concurrency:
