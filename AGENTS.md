@@ -20,7 +20,7 @@ Turn AI-generated music (and related audio files) into real, repeatable profit w
 1. Read `docs/02-workflow.md` and `docs/01-quickstart.md` first.
 2. Check current tool recommendations in `configs/tools.json`.
 3. Use `templates/` for prompts, checklists, and client offers.
-4. Log rights in the style of `templates/rights-log.md`.
+4. Log rights using `scripts/rights_logger.py` or the Markdown template.
 5. Prefer the hybrid path: generate catalog + sell custom work.
 
 ### Decision Flow (agent should follow this)
@@ -41,7 +41,7 @@ Is the output pure AI with zero human edit?
 When performing work, agents should produce:
 - Clear step list of what was done
 - Rights log entry (tool, plan, date, commercial status)
-- Cost incurred this session
+- Cost incurred this session (log via cost_tracker if possible)
 - Next recommended actions
 
 ### Safety Rules (non-negotiable)
@@ -50,10 +50,18 @@ When performing work, agents should produce:
 - Always recommend disclosure on DistroKid / DSPs.
 - Flag high-risk platforms (current: Udio for external distribution).
 
+## Available Scripts (stdlib Python)
+- `python scripts/rights_logger.py add|list|export`
+- `python scripts/cost_tracker.py add-expense|add-income|summary|list`
+
+## Multi-Agent Collaboration
+See `docs/08-multi-agent-frameworks.md` for the 2026 landscape and the recommended role design (Generator, Rights, Editor, Sales, Catalog, Supervisor).
+
 ## File Map for Agents
 - `README.md` → High-level overview + numbers
 - `docs/` → Detailed operational guides
 - `templates/` → Copy-paste ready assets
+- `scripts/` → Executable helpers
 - `playbooks/` → Recurring processes
 - `configs/tools.json` → Current recommended tools & costs
 
