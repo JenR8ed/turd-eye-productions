@@ -1,0 +1,68 @@
+name: JAIOS Turd Eye Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality Gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Syntax check scripts
+        run: |
+          python -m py_compile scripts/rights_logger.py
+          python -m py_compile scripts/cost_tracker.py
+          echo "✓ Python scripts compile cleanly"
+
+      - name: Validate tools.json
+        run: |
+          python -c "import json; json.load(open('configs/tools.json')); print('✓ tools.json is valid JSON')"
+
+      - name: Check required architecture files
+        run: |
+          for f in AGENTS.md ARCHITECTURE.md README.md STRUCTURE.md LICENSE; do
+            if [ ! -f "$f" ]; then
+              echo "Missing required file: $f"
+              exit 1
+            fi
+          done
+          echo "✓ Core architecture files present"
+
+  status:
+    name: JAIOS Status
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deployment Summary
+        run: |
+          echo "✅ Turd Eye Productions pipeline passed"
+          echo "Repo: ${{ github.repository }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Type: Knowledge + Tooling (JAIOS module)"
+          echo "Next: Update Notion JAIOS Command Center if needed"
+
+      # Future: Notion sync via jenr8ed-deploy-kit
+      # - name: Sync to Notion Command Center
+      #   run: |
+      #     # node path/to/sync-deployment.js ...
+      #   env:
+      #     NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
