@@ -7,6 +7,13 @@ turd-eye-productions/
 ├── STRUCTURE.md                  # This file
 ├── LICENSE                       # MIT
 │
+├── scripts/                      # Executable helpers (stdlib Python)
+│   ├── rights_logger.py          # Log generation rights
+│   └── cost_tracker.py           # Track expenses & income
+│
+├── data/                         # Runtime data (created by scripts)
+│   └── README.md
+│
 ├── docs/                         # Operational guides
 │   ├── 01-quickstart.md
 │   ├── 02-workflow.md
@@ -14,24 +21,19 @@ turd-eye-productions/
 │   ├── 04-cost-profit.md
 │   ├── 05-risk-mitigation.md
 │   ├── 06-custom-commissions.md
-│   └── 07-platform-policies.md
+│   └── 08-multi-agent-frameworks.md
 │
 ├── templates/                    # Copy-paste assets
-│   ├── prompt-templates/
-│   │   ├── suno-prompts.md
-│   │   └── soundraw-prompts.md
 │   ├── fiverr-gig.md
 │   ├── client-brief.md
 │   ├── release-checklist.md
 │   └── rights-log.md
 │
-├── playbooks/                    # Recurring processes
-│   ├── daily-ops.md
-│   ├── weekly-review.md
-│   └── scaling.md
+├── playbooks/
+│   └── daily-ops.md
 │
 └── configs/
-    └── tools.json                # Current recommended tools, costs, status
+    └── tools.json                # Current recommended tools & costs
 ```
 
 ## Design Goals
@@ -39,3 +41,4 @@ turd-eye-productions/
 - **Human-readable**: Clear, imperative language.
 - **Modular**: Agents and humans can load only what they need.
 - **Living documentation**: Update `configs/tools.json` when prices or policies change.
+- **Lightweight automation**: Scripts use only the Python standard library.
